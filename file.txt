@@ -1,0 +1,87 @@
+Install Django
+To see Pipenv in action, let’s create a new directory and install Django. First, navigate
+to the Desktop, create a new directory django, and enter it with cd.
+Command Line
+$ cd ~/Desktop
+$ mkdir django
+$ cd django
+Now use Pipenv to install Django.
+Chapter 1: Initial Set Up 13
+Command Line
+$ pipenv install django==3.0
+If you look within our directory, there are now two new files: Pipfile and Pipfile.lock.
+We have the information we need for a new virtual environment but we have not
+activated it yet. Let’s do that with pipenv shell.
+Command Line
+$ pipenv shell
+If you are on a Mac you should now see parentheses around the name of your current
+directory on your command line which indicates the virtual environment is activated.
+Since we’re in a django directory that means we should see (django) at the beginning
+of the command line prompt.
+Note that due to an open bug Windows users will not see visual feedback of the virtual
+environment at this time. But if you can run django-admin startproject in the next
+section then you know your virtual environment has Django installed properly.
+Command Line
+(django) $
+This means it’s working! Create a new Django project called test_project with the
+following command. Don’t forget that period . at the end.
+Command Line
+(django) $ django-admin startproject test_project .
+It’s worth pausing here to explain why you should add a period (.) to the command.
+If you just run django-admin startproject test_project then by default Django will
+create this directory structure:
+Chapter 1: Initial Set Up 14
+Layout
+└── test_project
+├── manage.py
+└── test_project
+├── __init__.py
+├── settings.py
+├── urls.py
+└── wsgi.py
+See how it creates a new directory test_project and then within it a manage.py file
+and a test_project directory? That feels redundant to me since we already created
+and navigated into a django directory on our Desktop. By running django-admin
+startproject test_project . with the period at the end–which says, install in the
+current directory–the result is instead this:
+Layout
+├── manage.py
+└── test_project
+├── __init__.py
+├── settings.py
+├── urls.py
+└── wsgi.py
+The takeaway is that it doesn’t really matter if you include the period or not at the
+end of the command, but I prefer to include the period and so that’s how we’ll do it in
+this book.
+Chapter 1: Initial Set Up 15
+As you progress in your journey learning Django, you’ll start to bump up more and
+more into similar situations where there are different opinions within the Django
+community on the correct best practice. Django is eminently customizable, which
+is a great strength, however the tradeoff is that this flexibility comes at the cost of
+seeming complexity. Generally speaking it’s a good idea to research any such issues
+that arise, make a decision, and then stick with it!
+Now let’s confirm everything is working by running Django’s local web server.
+Command Line
+(django) $ python manage.py runserver
+Watching for file changes with StatReloader
+Performing system checks...
+System check identified no issues (0 silenced).
+You have 17 unapplied migration(s). Your project may not work properly until
+you apply the migrations for app(s): admin, auth, contenttypes, sessions.
+Run 'python manage.py migrate' to apply them.
+December 09, 2019 - 14:52:27
+Django version 3.0, using settings 'test_project.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+Don’t worry about the text in red about “17 unapplied migrations.” We’ll get to that
+shortly but the important part, for now, is to visit http://127.0.0.1:8000/ and make
+sure the following image is visible:
+Chapter 1: Initial Set Up 16
+Django welcome page
+To stop our local server type Control+c. Then exit our virtual environment using the
+command exit.
+Command Line
+(django) $ exit
+We can always reactivate the virtual environment again using pipenv shell at any
+time
